@@ -1,11 +1,28 @@
-# reav: Reverse Edit Any Video with Claude
+# REAV: Reverse Edit Any Video
 
-A Claude Code skill that **watches a sample video and edits your footage in the same pattern**.
+A Claude Code skill that **copies the edit of any video onto your own footage**.
 
-Give it a reel, Short or TikTok you like plus a folder of your clips. It measures the sample's edit
-(pace, cuts on the beat, transitions, text, effects, color, story structure), writes that down as
-`style.md`, watches all of your footage, picks the best parts, plans a story that flows like the
-sample, and renders your footage edited the same way: frame-exact cuts, matched look, same text.
+Clone the edit of any Instagram reel, TikTok or YouTube video in two steps:
+
+1. **Give it the URL** of the video you want to copy (or a video file).
+2. **Give it access to your video gallery**: the folder with your clips.
+
+Claude breaks down how the sample is edited (pace, cuts on the beat, transitions, text, effects,
+color and story structure) and writes that recipe down as `style.md`. Then it watches every clip in
+your gallery, picks the best moments, plans a story that flows like the sample and renders a
+finished video: frame-exact cuts, matched color, same text style. No timeline, no editing app.
+
+### Use cases
+
+- **Creators**: turn a pile of raw clips into a reel cut like the one that's trending right now.
+- **Brands and marketers**: rebuild an ad that works with your own product shots and rewritten text.
+- **Agencies and freelance editors**: turn a client's "make it like this" reference into a
+  measured spec and a first cut in one go, then polish from there.
+- **Travel and vlog**: edit trip footage in the style of your favorite travel reel, cut to your own song.
+- **Series and batch content**: run the same sample against each new batch of clips so every
+  post keeps the same pace and look.
+- **Learning to edit**: get a plain-words breakdown of how any video is cut (shot lengths, beat sync,
+  transitions, color, text) without rendering anything.
 
 ```
 sample video ─► watch & measure ─► style.md ─► watch ALL footage ─► best parts ─► plan the sequence ─► apply style.md ─► review ─► final.mp4
