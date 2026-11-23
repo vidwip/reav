@@ -4,15 +4,15 @@
 #   From a clone:   ./install.sh [--global] [--project DIR] [--no-deps] [setup options]
 #   One-liner:      curl -fsSL https://raw.githubusercontent.com/vidwip/reav/main/install.sh | bash
 #
-# Project install (default): <project>/.claude/skills/reverse-edit-any-video  (project = current dir)
-# --global:                  ~/.claude/skills/reverse-edit-any-video
+# Project install (default): <project>/.claude/skills/reav  (project = current dir)
+# --global:                  ~/.claude/skills/reav
 # Then runs scripts/setup.sh: ffmpeg, python3, node, yt-dlp, video-analyzer skill, Remotion skills,
 # Remotion packages + headless Chrome. Extra options (--with-whisper, --no-remotion) pass through.
 
 set -euo pipefail
 
 REPO_URL="https://github.com/vidwip/reav.git"
-SKILL="reverse-edit-any-video"
+SKILL="reav"
 PROJECT="$PWD"
 GLOBAL=0
 DEPS=1
@@ -47,6 +47,13 @@ if [[ "$(cd "$SRC" && pwd)" != "$(mkdir -p "$DEST" && cd "$DEST" && pwd)" ]]; th
 fi
 chmod +x "$DEST"/scripts/*.sh "$DEST"/scripts/*.py 2>/dev/null || true
 echo "Installed skill -> $DEST"
+
+# the skill used to be called "reverse-edit-any-video"; remove that copy so it isn't loaded twice
+OLD="$(dirname "$DEST")/reverse-edit-any-video"
+if [[ -f "$OLD/SKILL.md" ]] && grep -q '^name: reverse-edit-any-video$' "$OLD/SKILL.md"; then
+  rm -rf "$OLD"
+  echo "Removed old install -> $OLD"
+fi
 
 if [[ $DEPS -eq 1 ]]; then
   bash "$DEST/scripts/setup.sh" --project "$PROJECT" "${PASS[@]+"${PASS[@]}"}"

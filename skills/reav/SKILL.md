@@ -1,5 +1,5 @@
 ---
-name: reverse-edit-any-video
+name: reav
 description: Reverse Edit Any Video. Watches a sample video (Instagram reel, TikTok, YouTube Short, ad, vlog, trailer), writes down its edit DNA in style.md (pace, cuts on the beat, transitions, text, effects, color correction, story structure), then watches all of the user's footage, picks the best parts, plans a story in the same flow and renders the user's footage edited in the same pattern. Use when the user gives a reference video or link plus their own clips and says things like "edit my footage like this", "copy this edit", "recreate this reel with my clips", "same style / pacing / transitions as this", "reverse edit", "make it like this TikTok", or "match this video". Installs its own tools (ffmpeg, Remotion, the video-analyzer skill) on first run.
 argument-hint: <reference URL or video> <footage folder> [notes]
 ---

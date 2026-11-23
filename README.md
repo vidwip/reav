@@ -1,18 +1,26 @@
 # REAV: Reverse Edit Any Video
 
-A Claude Code skill that **copies the edit of any video onto your own footage**.
+## Overview
 
-Clone the edit of any Instagram reel, TikTok or YouTube video in two steps:
+REAV is a Claude Code skill that **copies the edit of any video onto your own footage**.
 
-1. **Give it the URL** of the video you want to copy (or a video file).
-2. **Give it access to your video gallery**: the folder with your clips.
+Show it an Instagram reel, TikTok or YouTube video you like. Claude breaks down how it's edited
+(pace, cuts on the beat, transitions, text, effects, color and story structure) and writes that
+recipe down as `style.md`. Then it watches every clip in your folder, picks the best moments, plans
+a story that flows like the sample and renders a finished video: frame-exact cuts, matched color,
+same text style. No timeline, no editing app.
 
-Claude breaks down how the sample is edited (pace, cuts on the beat, transitions, text, effects,
-color and story structure) and writes that recipe down as `style.md`. Then it watches every clip in
-your gallery, picks the best moments, plans a story that flows like the sample and renders a
-finished video: frame-exact cuts, matched color, same text style. No timeline, no editing app.
+## How it works
 
-### Use cases
+- **Add the link** to an Instagram reel, TikTok or YouTube video (or use a video file).
+- **Give it folder access**: point it at the folder with your clips.
+- **Ask `/reav` to clone the edit**. The finished video lands in `final-videos/`.
+
+```
+/reav https://www.instagram.com/reel/XXXXXXXX/ ./footage
+```
+
+## Use cases
 
 - **Creators**: turn a pile of raw clips into a reel cut like the one that's trending right now.
 - **Brands and marketers**: rebuild an ad that works with your own product shots and rewritten text.
@@ -23,10 +31,6 @@ finished video: frame-exact cuts, matched color, same text style. No timeline, n
   post keeps the same pace and look.
 - **Learning to edit**: get a plain-words breakdown of how any video is cut (shot lengths, beat sync,
   transitions, color, text) without rendering anything.
-
-```
-sample video ─► watch & measure ─► style.md ─► watch ALL footage ─► best parts ─► plan the sequence ─► apply style.md ─► review ─► final.mp4
-```
 
 ## Install
 
@@ -47,7 +51,7 @@ first time it runs.
 
 ### What gets installed automatically
 
-`install.sh` copies the skill to `.claude/skills/reverse-edit-any-video` and runs
+`install.sh` copies the skill to `.claude/skills/reav` and runs
 `scripts/setup.sh`, which installs or verifies:
 
 | Tool | Why | How |
@@ -60,7 +64,7 @@ first time it runs.
 | whisper (optional, `--with-whisper`) | speech-led samples (talking heads, captions) | pip / pipx |
 
 Re-running `setup.sh` is safe. It only fills in what's missing (about 1 s when everything is there).
-Check without installing: `bash .claude/skills/reverse-edit-any-video/scripts/setup.sh --check`.
+Check without installing: `bash .claude/skills/reav/scripts/setup.sh --check`.
 
 ## Use it
 
@@ -70,7 +74,7 @@ Start Claude Code in your project and ask in plain words:
 Reverse edit https://www.instagram.com/reel/XXXXXXXX/ using my clips in ./footage
 ```
 ```
-/reverse-edit-any-video ./samples/ad.mp4 ./trip-clips  make it 9:16, use my own song ./music/track.mp3
+/reav ./samples/ad.mp4 ./trip-clips  make it 9:16, use my own song ./music/track.mp3
 ```
 
 The final video lands in `final-videos/` and the whole job in `reav-projects/<name>/`.
@@ -83,7 +87,11 @@ The final video lands in `final-videos/` and the whole job in `reav-projects/<na
 - "Recreate this YouTube Short's edit with my vlog clips, vertical, highest quality."
 - "Just analyse this reel and write the style.md, don't render yet."
 
-## How it works
+## Under the hood
+
+```
+sample video ─► watch & measure ─► style.md ─► watch ALL footage ─► best parts ─► plan the sequence ─► apply style.md ─► review ─► final.mp4
+```
 
 | Step | What Claude does | Output |
 |---|---|---|
@@ -113,7 +121,7 @@ The skill matches your shots to the sample by **function, not content**. The sam
 hook" gets your most arresting shot, its "payoff on the drop" gets your hero shot, calm slots get calm
 shots. It then checks the cut as a story: hook promise, real escalation, payoff on the music, motion
 continuity across cuts, no repeats, nobody cut in half at 9:16. See
-[`references/storytelling.md`](skills/reverse-edit-any-video/references/storytelling.md).
+[`references/storytelling.md`](skills/reav/references/storytelling.md).
 
 ## Quality
 
@@ -139,7 +147,7 @@ reav-projects/<job>/
 
 ## Scripts
 
-All in `skills/reverse-edit-any-video/scripts/`, Python stdlib + ffmpeg, usable on their own:
+All in `skills/reav/scripts/`, Python stdlib + ffmpeg, usable on their own:
 
 | Script | Does |
 |---|---|
@@ -166,7 +174,7 @@ to download the file yourself.
 - **Sample won't download**: download it yourself and pass the file path.
 - **Remotion render hangs**: kill `chrome-headless-shell` processes and retry once. The skill falls
   back to pure ffmpeg rendering, which covers cuts, transitions, text, grading and zooms.
-- More in [`references/gotchas.md`](skills/reverse-edit-any-video/references/gotchas.md).
+- More in [`references/gotchas.md`](skills/reav/references/gotchas.md).
 
 ## Credits & licences
 
